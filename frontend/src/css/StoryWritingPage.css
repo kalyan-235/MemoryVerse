@@ -1,0 +1,332 @@
+/* ===== STORY WRITING PAGE ===== */
+
+.story-writing-page {
+  margin-left: 220px;
+  min-height: 100vh;
+  background: var(--color-cream);
+}
+
+.story-writing-content {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Left: Stories List Panel */
+.stories-list-panel {
+  background: #fff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(139, 99, 71, 0.08);
+}
+
+.stories-panel-title {
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3d2c1e;
+  margin-bottom: 14px;
+}
+
+.story-list-item {
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 6px;
+  border: 2px solid transparent;
+}
+
+.story-list-item:hover {
+  background: #fdf6ec;
+}
+
+.story-list-item.active {
+  background: rgba(155, 142, 196, 0.12);
+  border-color: #9b8ec4;
+}
+
+.story-list-item-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #3d2c1e;
+}
+
+.story-list-item-status {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 2px 8px;
+  margin-top: 4px;
+}
+
+.story-status-working {
+  background: rgba(168, 197, 218, 0.3);
+  color: #5a8fa8;
+}
+
+.story-status-draft {
+  background: rgba(200, 168, 130, 0.3);
+  color: #8b6347;
+}
+
+.story-status-pausing {
+  background: rgba(155, 142, 196, 0.2);
+  color: #9b8ec4;
+}
+
+.story-status-inprogress {
+  background: rgba(100, 180, 140, 0.25);
+  color: #3a8a5a;
+}
+
+.story-list-item-chapter-info {
+  font-size: 11px;
+  color: #c8a882;
+  margin-top: 2px;
+}
+
+.story-list-item-lock-icon {
+  font-size: 11px;
+  color: #c8a882;
+  margin-left: 4px;
+}
+
+.stories-view-all-link {
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9b8ec4;
+  cursor: pointer;
+}
+
+/* Right: Story Editor */
+.story-editor-panel {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(139, 99, 71, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.story-editor-top-bar {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f5e6d3;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.story-editor-title-area {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.story-editor-title-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #c8a882;
+}
+
+.story-editor-title-value {
+  font-family: 'Georgia', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #3d2c1e;
+}
+
+.story-editor-genre-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(155, 142, 196, 0.15);
+  color: #9b8ec4;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.story-editor-logline {
+  font-size: 13px;
+  color: #7a5c44;
+  margin-top: 8px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Story Tabs */
+.story-editor-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  border-bottom: 1px solid #f5e6d3;
+  background: #fdf6ec;
+}
+
+.story-editor-tab {
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9b8ec4;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.story-editor-tab.active {
+  color: #3d2c1e;
+  border-bottom-color: #9b8ec4;
+}
+
+.story-editor-tab:hover {
+  color: #3d2c1e;
+}
+
+/* Chapters List */
+.story-chapters-list {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+  border-right: 1px solid #f5e6d3;
+}
+
+.story-chapter-item {
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.story-chapter-item:hover {
+  background: #fdf6ec;
+}
+
+.story-chapter-item.active {
+  background: rgba(155, 142, 196, 0.15);
+}
+
+.story-chapter-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d2c1e;
+}
+
+.story-chapter-item-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.story-chapter-dot-done { background: #64b48c; }
+.story-chapter-dot-active { background: #9b8ec4; }
+.story-chapter-dot-locked { background: #c8a882; }
+
+/* Chapter Editor */
+.story-chapter-editor {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 400px;
+}
+
+.story-chapter-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story-chapter-editor-toolbar {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  background: #fdf6ec;
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.story-editor-toolbar-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #7a5c44;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.story-editor-toolbar-btn:hover {
+  background: #e8d5c0;
+}
+
+.story-chapter-text-area {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #3d2c1e;
+  resize: none;
+  background: transparent;
+  font-family: 'Georgia', serif;
+  min-height: 280px;
+}
+
+.story-chapter-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid #f5e6d3;
+}
+
+.story-word-count {
+  font-size: 12px;
+  color: #c8a882;
+}
+
+.story-autosave-status {
+  font-size: 12px;
+  color: #9b8ec4;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.story-save-chapter-btn {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #9b8ec4, #c8a882);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.story-save-chapter-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(155, 142, 196, 0.3);
+}

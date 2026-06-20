@@ -1,0 +1,229 @@
+/* ===== HOME PAGE – MEMORY JOURNEY MAP ===== */
+
+.journey-map-page {
+  margin-left: 220px;
+  min-height: 100vh;
+  background: var(--color-cream);
+}
+
+.journey-map-hero {
+  padding: 32px 32px 0;
+}
+
+.journey-map-heading {
+  font-family: 'Georgia', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #3d2c1e;
+}
+
+.journey-map-subheading {
+  font-size: 14px;
+  color: #9b8ec4;
+  margin-top: 4px;
+}
+
+/* Map Canvas */
+.journey-map-canvas {
+  position: relative;
+  margin: 24px 32px;
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #d4e8d0 0%, #a8c5da 35%, #f5e6d3 70%, #c8a882 100%);
+  box-shadow: 0 8px 32px rgba(139, 99, 71, 0.15);
+}
+
+.journey-map-bg-illustration {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+/* Journey Path SVG */
+.journey-path-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.journey-path-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 3;
+  stroke-dasharray: 8 6;
+  stroke-linecap: round;
+}
+
+/* Memory Points on Map */
+.memory-map-point {
+  position: absolute;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.memory-map-point-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9b8ec4, #c8a882);
+  border: 3px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.memory-map-point:hover .memory-map-point-circle {
+  transform: scale(1.2);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+}
+
+/* Memory Preview Popup */
+.memory-map-popup {
+  position: absolute;
+  bottom: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.memory-map-popup-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.memory-map-popup-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #3d2c1e;
+}
+
+.memory-map-popup-date {
+  font-size: 11px;
+  color: #9b8ec4;
+  margin-top: 2px;
+}
+
+.memory-map-popup-desc {
+  font-size: 11px;
+  color: #7a5c44;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.memory-map-popup-view-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 6px;
+  background: linear-gradient(135deg, #9b8ec4, #c8a882);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Below Map Sections */
+.home-sections-wrapper {
+  padding: 0 32px 32px;
+}
+
+.home-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.home-section-title {
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #3d2c1e;
+}
+
+.home-section-view-all {
+  font-size: 13px;
+  color: #9b8ec4;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-section-view-all:hover {
+  color: #3d2c1e;
+}
+
+/* Collections Row */
+.home-collections-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.home-collections-row::-webkit-scrollbar { display: none; }
+
+.home-collection-card {
+  min-width: 140px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.home-collection-card:hover {
+  transform: translateY(-4px);
+}
+
+.home-collection-card-img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+}
+
+.home-collection-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  padding: 12px 10px 8px;
+}
+
+.home-collection-card-name {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.home-collection-card-count {
+  color: rgba(255,255,255,0.75);
+  font-size: 10px;
+}

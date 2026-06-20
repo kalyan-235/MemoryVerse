@@ -1,0 +1,116 @@
+/* ===== TOP NAVBAR ===== */
+
+.navbar-container {
+  height: 64px;
+  background: rgba(253, 246, 236, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e8d5c0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.navbar-page-title {
+  font-family: 'Georgia', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #3d2c1e;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5e6d3;
+  border: 1px solid #e8d5c0;
+  border-radius: 24px;
+  padding: 8px 16px;
+  width: 240px;
+  transition: all 0.2s;
+}
+
+.navbar-search-bar:focus-within {
+  border-color: #9b8ec4;
+  box-shadow: 0 0 0 3px rgba(155, 142, 196, 0.15);
+  background: #fff;
+}
+
+.navbar-search-input {
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: #3d2c1e;
+  outline: none;
+  width: 100%;
+}
+
+.navbar-search-input::placeholder {
+  color: #c8a882;
+}
+
+.navbar-add-memory-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #9b8ec4, #c8a882);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(155, 142, 196, 0.3);
+}
+
+.navbar-add-memory-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(155, 142, 196, 0.4);
+}
+
+.navbar-notification-btn {
+  position: relative;
+  background: #f5e6d3;
+  border: 1px solid #e8d5c0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #7a5c44;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.navbar-notification-btn:hover {
+  background: #c8a882;
+  color: #fff;
+}
+
+.navbar-notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+  background: #9b8ec4;
+  border-radius: 50%;
+  font-size: 9px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

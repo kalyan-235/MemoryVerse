@@ -1,0 +1,243 @@
+/* ===== MEMORY DETAIL PAGE ===== */
+
+.memory-detail-page {
+  margin-left: 220px;
+  min-height: 100vh;
+  background: var(--color-cream);
+  padding: 32px;
+}
+
+.memory-detail-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #9b8ec4;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 24px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.memory-detail-back-btn:hover {
+  color: #3d2c1e;
+}
+
+.memory-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Main Image */
+.memory-detail-main-image-wrapper {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(139, 99, 71, 0.12);
+}
+
+.memory-detail-main-image {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Navigation Arrows */
+.memory-detail-nav-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.memory-detail-prev-btn,
+.memory-detail-next-btn {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #e8d5c0;
+  border-radius: 12px;
+  background: #fff;
+  color: #7a5c44;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.memory-detail-prev-btn:hover,
+.memory-detail-next-btn:hover {
+  background: #9b8ec4;
+  color: #fff;
+  border-color: #9b8ec4;
+}
+
+/* Right Info Panel */
+.memory-detail-info-panel {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 4px 16px rgba(139, 99, 71, 0.08);
+}
+
+.memory-detail-title {
+  font-family: 'Georgia', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #3d2c1e;
+  line-height: 1.3;
+}
+
+.memory-detail-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.memory-detail-date {
+  font-size: 13px;
+  color: #9b8ec4;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.memory-detail-location {
+  font-size: 13px;
+  color: #c8a882;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.memory-detail-description {
+  font-size: 14px;
+  color: #3d2c1e;
+  line-height: 1.7;
+  margin-top: 18px;
+}
+
+.memory-detail-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.memory-detail-tag {
+  background: rgba(155, 142, 196, 0.15);
+  color: #9b8ec4;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.memory-detail-divider {
+  height: 1px;
+  background: #f5e6d3;
+  margin: 20px 0;
+}
+
+/* Action Buttons */
+.memory-detail-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.memory-action-favorite-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e8d5c0;
+  background: transparent;
+  color: #7a5c44;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.memory-action-favorite-btn.favorited {
+  background: rgba(255, 100, 100, 0.1);
+  border-color: #ff6464;
+  color: #ff6464;
+}
+
+.memory-action-favorite-btn:hover {
+  border-color: #ff6464;
+  color: #ff6464;
+}
+
+.memory-action-edit-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e8d5c0;
+  background: transparent;
+  color: #7a5c44;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.memory-action-edit-btn:hover {
+  background: #9b8ec4;
+  color: #fff;
+  border-color: #9b8ec4;
+}
+
+.memory-action-share-btn {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e8d5c0;
+  background: transparent;
+  color: #7a5c44;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.memory-action-share-btn:hover {
+  background: #a8c5da;
+  color: #fff;
+  border-color: #a8c5da;
+}
+
+.memory-action-delete-btn {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ffe0e0;
+  background: transparent;
+  color: #e07070;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.memory-action-delete-btn:hover {
+  background: #ffe0e0;
+}

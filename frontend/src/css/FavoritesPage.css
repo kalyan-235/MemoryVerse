@@ -1,0 +1,131 @@
+/* ===== FAVORITES PAGE ===== */
+
+.favorites-page {
+  margin-left: 220px;
+  min-height: 100vh;
+  background: var(--color-cream);
+  padding: 32px;
+}
+
+.favorites-page-heading {
+  font-family: 'Georgia', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #3d2c1e;
+  margin-bottom: 4px;
+}
+
+.favorites-page-subtext {
+  font-size: 14px;
+  color: #9b8ec4;
+  margin-bottom: 28px;
+}
+
+/* Tabs */
+.favorites-tabs-row {
+  display: flex;
+  gap: 0;
+  background: #fff;
+  border-radius: 14px;
+  padding: 4px;
+  width: fit-content;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 10px rgba(139, 99, 71, 0.08);
+}
+
+.favorites-tab-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9b8ec4;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.favorites-tab-btn.active {
+  background: linear-gradient(135deg, #9b8ec4, #c8a882);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(155, 142, 196, 0.25);
+}
+
+.favorites-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.favorites-empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: #c8a882;
+}
+
+.favorites-empty-icon {
+  font-size: 52px;
+  margin-bottom: 14px;
+}
+
+.favorites-empty-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #7a5c44;
+}
+
+.favorites-empty-desc {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* Favorite Diary / Story Card */
+.favorites-text-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(139, 99, 71, 0.08);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 4px solid #9b8ec4;
+}
+
+.favorites-text-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(139, 99, 71, 0.12);
+}
+
+.favorites-text-card-type {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #9b8ec4;
+  margin-bottom: 8px;
+}
+
+.favorites-text-card-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #3d2c1e;
+  margin-bottom: 6px;
+}
+
+.favorites-text-card-preview {
+  font-size: 13px;
+  color: #7a5c44;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.favorites-text-card-date {
+  font-size: 11px;
+  color: #c8a882;
+  margin-top: 10px;
+}
