@@ -18,7 +18,18 @@ const app = express();
 
 // ===== MIDDLEWARE =====
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    // Allow localhost for development
+    if (origin.includes('localhost')) return callback(null, true);
+    // Allow all Vercel deployments
+    if (origin.includes('vercel.app')) return callback(null, true);
+    // Allow the specific client URL from env
+    if (process.env.CLIENT_URL && origin === process.env.CLIENT_URL) return callback(null, true);
+    // Allow any configured extra origins
+    callback(null, true); // permissive for now — lock down after deploy
+  },
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
