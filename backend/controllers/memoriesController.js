@@ -126,11 +126,30 @@ const deleteMemory = async (req, res) => {
   try {
     const memory = await Memory.findOne({ _id: req.params.id, userId: req.user._id });
     if (!memory) return res.status(404).json({ message: 'Memory not found.' });
-    if (memory.imagePublicId) await cloudinary.uploader.destroy(memory.imagePublicId);
-    if (memory.videoPublicId) await cloudinary.uploader.destroy(memory.videoPublicId, { resource_type: 'video' });
+
+    // Try to delete from Cloudinary — but don't block if it fails
+    // (API key may not have delete permission, or image may already be gone)
+    if (memory.imagePublicId) {
+      try {
+        await cloudinary.uploader.destroy(memory.imagePublicId);
+      } catch (err) {
+        console.warn('⚠️  Could not delete image from Cloudinary:', err.message);
+      }
+    }
+    if (memory.videoPublicId) {
+      try {
+        await cloudinary.uploader.destroy(memory.videoPublicId, { resource_type: 'video' });
+      } catch (err) {
+        console.warn('⚠️  Could not delete video from Cloudinary:', err.message);
+      }
+    }
+
+    // Always delete from MongoDB regardless of Cloudinary result
     await memory.deleteOne();
+    console.log(`🗑️  Memory deleted: "${memory.title}"`);
     res.json({ message: 'Memory deleted.' });
   } catch (error) {
+    console.error('❌ Delete memory error:', error.message);
     res.status(500).json({ message: error.message });
   }
 };

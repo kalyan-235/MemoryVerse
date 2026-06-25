@@ -61,12 +61,20 @@ const deleteCollection = async (req, res) => {
   try {
     const collection = await Collection.findOne({ _id: req.params.id, userId: req.user._id });
     if (!collection) return res.status(404).json({ message: 'Collection not found.' });
+
+    // Try Cloudinary delete — don't block if it fails
     if (collection.coverImagePublicId) {
-      await cloudinary.uploader.destroy(collection.coverImagePublicId);
+      try {
+        await cloudinary.uploader.destroy(collection.coverImagePublicId);
+      } catch (err) {
+        console.warn('⚠️  Could not delete cover from Cloudinary:', err.message);
+      }
     }
+
     await collection.deleteOne();
     res.json({ message: 'Collection deleted successfully.' });
   } catch (error) {
+    console.error('❌ Delete collection error:', error.message);
     res.status(500).json({ message: error.message });
   }
 };
