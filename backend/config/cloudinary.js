@@ -1,57 +1,82 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const multer = require('multer');
+const multer     = require('multer');
+const streamifier = require('streamifier');
 
-// Configure Cloudinary with credentials from .env
+// Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key:    process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Storage for memory images & videos
-const memoryMediaStorage = new CloudinaryStorage({
-  cloudinary,
-  params: async (req, file) => ({
-    folder: 'memoryverse/memories',
-    resource_type: file.mimetype.startsWith('video') ? 'video' : 'image',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'mp4', 'mov'],
-    transformation: file.mimetype.startsWith('video')
-      ? undefined
-      : [{ width: 1200, crop: 'limit', quality: 'auto' }],
-  }),
-});
+// ── Store files in memory (buffer), NOT disk or Cloudinary directly ──
+// This avoids multer-storage-cloudinary permission issues
+const memoryStorage = multer.memoryStorage();
 
-// Storage for collection cover images
-const collectionCoverStorage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: 'memoryverse/collections',
-    resource_type: 'image',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ width: 600, height: 400, crop: 'fill', quality: 'auto' }],
+const uploadMemoryMedia = multer({
+  storage: memoryStorage,
+  limits: { fileSize: 50 * 1024 * 1024 }, // 50MB
+  fileFilter: (req, file, cb) => {
+    const allowed = [
+      'image/jpeg', 'image/jpg', 'image/png',
+      'image/webp', 'image/gif',
+      'video/mp4', 'video/quicktime', 'video/webm',
+    ];
+    if (allowed.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error(`File type "${file.mimetype}" is not supported.`), false);
+    }
   },
 });
 
-// Storage for profile photos
-const profilePhotoStorage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: 'memoryverse/profiles',
-    resource_type: 'image',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ width: 200, height: 200, crop: 'thumb', gravity: 'face', quality: 'auto' }],
-  },
+const uploadCollectionCover = multer({
+  storage: memoryStorage,
+  limits: { fileSize: 10 * 1024 * 1024 },
 });
 
-// Multer upload handlers
-const uploadMemoryMedia    = multer({ storage: memoryMediaStorage });
-const uploadCollectionCover = multer({ storage: collectionCoverStorage });
-const uploadProfilePhoto   = multer({ storage: profilePhotoStorage });
+const uploadProfilePhoto = multer({
+  storage: memoryStorage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
+
+/**
+ * uploadToCloudinary — uploads a buffer directly to Cloudinary via upload_stream.
+ * Returns { secure_url, public_id, resource_type }
+ */
+const uploadToCloudinary = (buffer, folder, resourceType = 'image') => {
+  return new Promise((resolve, reject) => {
+    const uploadOptions = {
+      folder,
+      resource_type: resourceType,
+      quality: 'auto:good',
+    };
+
+    if (resourceType === 'image') {
+      uploadOptions.transformation = [{ width: 1200, crop: 'limit' }];
+    }
+
+    const uploadStream = cloudinary.uploader.upload_stream(
+      uploadOptions,
+      (error, result) => {
+        if (error) {
+          console.error('❌ Cloudinary upload_stream error:', error);
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }
+    );
+
+    // Pipe the buffer into the stream
+    streamifier.createReadStream(buffer).pipe(uploadStream);
+  });
+};
 
 module.exports = {
   cloudinary,
   uploadMemoryMedia,
   uploadCollectionCover,
   uploadProfilePhoto,
+  uploadToCloudinary,
 };

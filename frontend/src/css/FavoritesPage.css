@@ -1,7 +1,6 @@
 /* ===== FAVORITES PAGE ===== */
 
 .favorites-page {
-  margin-left: 220px;
   min-height: 100vh;
   background: var(--color-cream);
   padding: 32px;
@@ -129,3 +128,4 @@
   color: #c8a882;
   margin-top: 10px;
 }
+

@@ -18,9 +18,7 @@ export const profileApi = {
   uploadProfilePhoto: async (imageFile) => {
     const formData = new FormData();
     formData.append('profileImage', imageFile);
-    const res = await axiosInstance.post('/profile/photo', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    const res = await axiosInstance.post('/profile/photo', formData);
     return res.data;
   },
 

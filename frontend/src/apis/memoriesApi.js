@@ -2,7 +2,9 @@ import axiosInstance from './axiosInstance';
 
 // All memory-related API calls
 export const memoriesApi = {
-  /** Fetch all memories for the logged-in user */
+  /** Fetch all memories for the logged-in user.
+   *  Pass { map: true } to get only non-collection memories (for Journey Map)
+   */
   getAllMemories: async (params = {}) => {
     const res = await axiosInstance.get('/memories', { params });
     return res.data;
@@ -16,9 +18,8 @@ export const memoriesApi = {
 
   /** Create a new memory — sends FormData for file uploads */
   createMemory: async (formData) => {
-    const res = await axiosInstance.post('/memories', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    // Do NOT set Content-Type header — axios + browser handle it automatically for FormData
+    const res = await axiosInstance.post('/memories', formData);
     return res.data;
   },
 

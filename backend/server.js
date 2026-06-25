@@ -11,6 +11,8 @@ const diaryRoutes       = require('./routes/diaryRoutes');
 const storiesRoutes     = require('./routes/storiesRoutes');
 const searchRoutes      = require('./routes/searchRoutes');
 const profileRoutes     = require('./routes/profileRoutes');
+const favoritesRoutes   = require('./routes/favoritesRoutes');
+const testRoutes        = require('./routes/testRoutes');
 
 const app = express();
 
@@ -30,6 +32,8 @@ app.use('/api/diary',       diaryRoutes);
 app.use('/api/stories',     storiesRoutes);
 app.use('/api/search',      searchRoutes);
 app.use('/api/profile',     profileRoutes);
+app.use('/api/favorites',   favoritesRoutes);
+app.use('/api/test',        testRoutes);
 
 // ===== HEALTH CHECK =====
 app.get('/api/health', (req, res) => {

@@ -57,6 +57,8 @@ function AddMemoryModal({ isOpen, onClose, onSave, collections = [] }) {
     try {
       await onSave({ ...formData, mediaFile });
       onClose();
+    } catch (err) {
+      // error is shown by parent (toast)
     } finally {
       setIsSubmitting(false);
     }

@@ -1,7 +1,6 @@
 /* ===== SEARCH PAGE ===== */
 
 .search-page {
-  margin-left: 220px;
   min-height: 100vh;
   background: var(--color-cream);
   padding: 32px;
@@ -179,3 +178,4 @@
   background: rgba(155, 142, 196, 0.2);
   color: #3d2c1e;
 }
+

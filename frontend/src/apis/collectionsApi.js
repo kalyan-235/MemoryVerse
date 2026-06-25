@@ -39,7 +39,6 @@ export const collectionsApi = {
     const res = await axiosInstance.post(
       `/collections/${collectionId}/cover`,
       formData,
-      { headers: { 'Content-Type': 'multipart/form-data' } },
     );
     return res.data;
   },

@@ -3,9 +3,7 @@ const nodemailer = require('nodemailer');
 // Create reusable transporter using Nodemailer + Gmail SMTP
 const createEmailTransporter = () =>
   nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: Number(process.env.EMAIL_PORT),
-    secure: false, // TLS
+    service: 'gmail',   // auto-sets host + port for Gmail
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,

@@ -1,7 +1,6 @@
 /* ===== COLLECTIONS PAGE ===== */
 
 .collections-page {
-  margin-left: 220px;
   min-height: 100vh;
   background: var(--color-cream);
   padding: 0;
@@ -242,3 +241,4 @@
   font-weight: 600;
   cursor: pointer;
 }
+

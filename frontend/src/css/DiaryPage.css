@@ -1,7 +1,6 @@
 /* ===== DIARY PAGE ===== */
 
 .diary-page {
-  margin-left: 220px;
   min-height: 100vh;
   background: var(--color-cream);
 }
@@ -243,3 +242,4 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(155, 142, 196, 0.3);
 }
+

@@ -1,7 +1,6 @@
 /* ===== CALENDAR MEMORIES PAGE ===== */
 
 .calendar-memories-page {
-  margin-left: 220px;
   min-height: 100vh;
   background: var(--color-cream);
 }
@@ -251,3 +250,4 @@
   font-size: 15px;
   font-weight: 500;
 }
+

@@ -1,7 +1,6 @@
 /* ===== STORY WRITING PAGE ===== */
 
 .story-writing-page {
-  margin-left: 220px;
   min-height: 100vh;
   background: var(--color-cream);
 }
@@ -330,3 +329,4 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(155, 142, 196, 0.3);
 }
+

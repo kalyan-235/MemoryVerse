@@ -1,30 +1,31 @@
 import { IoEllipsisHorizontal, IoHeartOutline, IoHeart, IoLockClosedOutline } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import '../css/CollectionsPage.css';
 
 /**
- * CollectionCard – displays a single collection with cover image,
- * name, memory count, and quick action buttons.
+ * CollectionCard – displays a single collection.
+ * onClick prop controls what happens when card is clicked (open folder, navigate, etc.)
+ * Parent decides navigation — this component does NOT navigate on its own.
  */
-function CollectionCard({ collection, onOptionsClick }) {
+function CollectionCard({ collection, onClick, onOptionsClick }) {
   const [isFavorited, setIsFavorited] = useState(collection?.isFavorite || false);
-  const navigate = useNavigate();
+
+  const coverSrc =
+    collection?.coverImage ||
+    `https://placehold.co/400x200/f5e6d3/c8a882?text=${encodeURIComponent(collection?.name || 'Collection')}`;
 
   return (
     <article
       className="collection-card"
-      onClick={() => navigate(`/collections/${collection._id}`)}
+      onClick={() => onClick?.(collection)}
       role="button"
       tabIndex={0}
-      aria-label={`Collection: ${collection?.name}`}
+      aria-label={`Open collection: ${collection?.name}`}
+      onKeyDown={e => e.key === 'Enter' && onClick?.(collection)}
     >
       {/* Cover Image */}
       <img
-        src={
-          collection?.coverImage ||
-          'https://placehold.co/400x200/f5e6d3/c8a882?text=Collection'
-        }
+        src={coverSrc}
         alt={collection?.name}
         className="collection-card-cover"
         loading="lazy"
@@ -40,29 +41,23 @@ function CollectionCard({ collection, onOptionsClick }) {
       {/* Favorite Button */}
       <button
         className="collection-card-favorite-btn"
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsFavorited((p) => !p);
-        }}
+        onClick={e => { e.stopPropagation(); setIsFavorited(p => !p); }}
         aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
       >
         {isFavorited ? <IoHeart color="#ff6464" /> : <IoHeartOutline />}
       </button>
 
-      {/* More Options */}
+      {/* Options button */}
       <button
         className="collection-card-action-btn"
         style={{ position: 'absolute', top: '10px', right: '10px' }}
-        onClick={(e) => {
-          e.stopPropagation();
-          onOptionsClick?.(collection);
-        }}
+        onClick={e => { e.stopPropagation(); onOptionsClick?.(collection); }}
         aria-label="Collection options"
       >
         <IoEllipsisHorizontal />
       </button>
 
-      {/* Card Info */}
+      {/* Info */}
       <div className="collection-card-body">
         <div className="collection-card-name">{collection?.name}</div>
         <div className="collection-card-memory-count">
