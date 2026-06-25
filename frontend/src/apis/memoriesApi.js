@@ -10,9 +10,15 @@ export const memoriesApi = {
     return res.data;
   },
 
-  /** Fetch a single memory by its ID (includes prev/next IDs) */
-  getMemoryById: async (memoryId) => {
-    const res = await axiosInstance.get(`/memories/${memoryId}`);
+  /** Fetch a single memory by its ID.
+   *  Pass source='collection' and collectionId to get prev/next within collection only.
+   *  Default: prev/next within map memories (no collection).
+   */
+  getMemoryById: async (memoryId, options = {}) => {
+    const params = {};
+    if (options.source) params.source = options.source;
+    if (options.collectionId) params.collectionId = options.collectionId;
+    const res = await axiosInstance.get(`/memories/${memoryId}`, { params });
     return res.data;
   },
 

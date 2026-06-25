@@ -4,18 +4,36 @@ import { IoHeartOutline, IoHeart, IoLocationOutline,
          IoCalendarOutline, IoVideocamOutline } from 'react-icons/io5';
 import '../css/MemoryCard.css';
 
-function MemoryCard({ memory, onFavoriteToggle }) {
+/**
+ * MemoryCard
+ * Props:
+ *   memory          — the memory object
+ *   source          — 'map' (default) | 'collection' — controls prev/next scope
+ *   collectionId    — required when source='collection'
+ *   backLabel       — label for back button on detail page
+ *   onFavoriteToggle — callback after toggling
+ */
+function MemoryCard({ memory, source = 'map', collectionId = null, backLabel, onFavoriteToggle }) {
   const [isFavorited, setIsFavorited] = useState(memory?.isFavorite || false);
   const navigate = useNavigate();
 
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
-    setIsFavorited((prev) => !prev);
+    setIsFavorited(p => !p);
     onFavoriteToggle?.(memory._id, !isFavorited);
   };
 
   const handleCardClick = () => {
-    navigate(`/memory/${memory._id}`);
+    const label    = source === 'collection' ? `← ${collectionId ? 'Collection' : 'Collections'}` : '← Back to Map';
+    const returnTo = source === 'collection' ? '/collections' : '/';
+    navigate(`/memory/${memory._id}`, {
+      state: {
+        source,
+        collectionId: collectionId || memory.collectionId || null,
+        backLabel:    backLabel || label,
+        returnTo,                    // exact path to return to on back click
+      },
+    });
   };
 
   const formattedDate = memory?.date
@@ -30,9 +48,9 @@ function MemoryCard({ memory, onFavoriteToggle }) {
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
+      onKeyDown={e => e.key === 'Enter' && handleCardClick()}
       aria-label={`Memory: ${memory?.title}`}
     >
-      {/* Thumbnail */}
       <img
         src={memory?.imageUrl || 'https://placehold.co/400x220/f5e6d3/c8a882?text=Memory'}
         alt={memory?.title}
@@ -40,37 +58,32 @@ function MemoryCard({ memory, onFavoriteToggle }) {
         loading="lazy"
       />
 
-      {/* Video Badge */}
       {memory?.videoUrl && (
         <span className="memory-card-video-badge">
-          <IoVideocamOutline size={10} /> Video
+          <IoVideocamOutline size={10}/> Video
         </span>
       )}
 
-      {/* Favorite Button */}
       <button
         className={`memory-card-favorite-btn ${isFavorited ? 'favorited' : ''}`}
         onClick={handleFavoriteClick}
         aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
       >
-        {isFavorited ? <IoHeart color="#ff6464" /> : <IoHeartOutline />}
+        {isFavorited ? <IoHeart color="#ff6464"/> : <IoHeartOutline/>}
       </button>
 
-      {/* Card Body */}
       <div className="memory-card-body">
         <h3 className="memory-card-title">{memory?.title}</h3>
 
         {formattedDate && (
           <div className="memory-card-date">
-            <IoCalendarOutline size={11} />
-            {formattedDate}
+            <IoCalendarOutline size={11}/> {formattedDate}
           </div>
         )}
 
         {memory?.location && (
           <div className="memory-card-location">
-            <IoLocationOutline size={11} />
-            {memory.location}
+            <IoLocationOutline size={11}/> {memory.location}
           </div>
         )}
 
@@ -80,7 +93,7 @@ function MemoryCard({ memory, onFavoriteToggle }) {
 
         {memory?.tags?.length > 0 && (
           <div className="memory-card-tags-row">
-            {memory.tags.slice(0, 3).map((tag) => (
+            {memory.tags.slice(0, 3).map(tag => (
               <span key={tag} className="memory-card-tag">#{tag}</span>
             ))}
           </div>

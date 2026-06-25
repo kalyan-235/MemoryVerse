@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   IoAddOutline, IoCloseOutline, IoImageOutline,
   IoArrowBackOutline, IoTrashOutline,
@@ -26,9 +27,16 @@ function CollectionsPage() {
   const [isLoadingMemories, setIsLoadingMemories] = useState(false);
 
   // New collection modal
-  const [showNewCollModal, setShowNewCollModal] = useState(false);
-  const [newCollName, setNewCollName]           = useState('');
-  const [isCreating, setIsCreating]             = useState(false);
+  const [showNewCollModal, setShowNewCollModal]   = useState(false);
+  const [newCollName, setNewCollName]             = useState('');
+  const [newCollFile, setNewCollFile]             = useState(null);
+  const [newCollPreview, setNewCollPreview]       = useState('');
+  const [isCreating, setIsCreating]               = useState(false);
+  const newCollFileRef = useRef(null);
+
+  // Edit cover image for existing collection
+  const coverInputRef = useRef(null);
+  const [isUpdatingCover, setIsUpdatingCover] = useState(false);
 
   // Add memory to folder modal
   const [showAddMemModal, setShowAddMemModal] = useState(false);
@@ -71,15 +79,60 @@ function CollectionsPage() {
     setFolderMemories([]);
   };
 
+  /* ── Update collection cover image ── */
+  const handleCoverChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file || !activeCollection) return;
+    setIsUpdatingCover(true);
+    toast.loading('Updating cover...', { id: 'cover-update' });
+    try {
+      const result = await uploadFileToCloudinary(file, 'memoryverse/collections');
+      const updated = await collectionsApi.updateCollection(activeCollection._id, {
+        coverImage: result.secure_url,
+      });
+      setActiveCollection(prev => ({ ...prev, coverImage: result.secure_url }));
+      setCollections(prev => prev.map(c =>
+        c._id === activeCollection._id ? { ...c, coverImage: result.secure_url } : c
+      ));
+      toast.dismiss('cover-update');
+      toast.success('Cover image updated! 🖼️');
+    } catch (err) {
+      toast.dismiss('cover-update');
+      toast.error(err.message || 'Failed to update cover.');
+    } finally {
+      setIsUpdatingCover(false);
+    }
+  };
+
   /* ── Create new collection ── */
   const handleCreateCollection = async (e) => {
     e.preventDefault();
     if (!newCollName.trim()) return;
     setIsCreating(true);
     try {
-      const created = await collectionsApi.createCollection({ name: newCollName.trim() });
+      let coverImage = '';
+
+      // Upload cover image to Cloudinary if selected
+      if (newCollFile) {
+        toast.loading('Uploading cover...', { id: 'coll-cover' });
+        try {
+          const result = await uploadFileToCloudinary(newCollFile, 'memoryverse/collections');
+          coverImage = result.secure_url;
+          toast.dismiss('coll-cover');
+        } catch (uploadErr) {
+          toast.dismiss('coll-cover');
+          console.warn('Cover upload failed:', uploadErr.message);
+        }
+      }
+
+      const created = await collectionsApi.createCollection({
+        name: newCollName.trim(),
+        coverImage,
+      });
       setCollections(prev => [...prev, { ...created, memoryCount: 0 }]);
       setNewCollName('');
+      setNewCollFile(null);
+      setNewCollPreview('');
       setShowNewCollModal(false);
       toast.success('Collection created! 📁');
     } catch (err) {
@@ -249,7 +302,13 @@ function CollectionsPage() {
             ) : (
               <div className="collections-grid">
                 {folderMemories.map(mem => (
-                  <MemoryCard key={mem._id} memory={mem} />
+                  <MemoryCard
+                    key={mem._id}
+                    memory={mem}
+                    source="collection"
+                    collectionId={activeCollection._id}
+                    backLabel={`← ${activeCollection.name}`}
+                  />
                 ))}
               </div>
             )}
@@ -406,6 +465,59 @@ function CollectionsPage() {
             <div className="new-collection-modal">
               <h3 className="new-collection-modal-title">📁 New Collection</h3>
               <form onSubmit={handleCreateCollection}>
+
+                {/* Cover Image Upload */}
+                {newCollPreview ? (
+                  <div style={{ position:'relative', marginBottom:'16px' }}>
+                    <img src={newCollPreview} alt="cover preview"
+                      style={{ width:'100%', height:'140px', objectFit:'cover',
+                        borderRadius:'12px', display:'block' }}/>
+                    <button type="button"
+                      onClick={() => { setNewCollFile(null); setNewCollPreview(''); }}
+                      style={{
+                        position:'absolute', top:'8px', right:'8px',
+                        background:'rgba(255,255,255,0.9)', border:'none',
+                        borderRadius:'50%', width:'28px', height:'28px',
+                        cursor:'pointer', fontSize:'16px',
+                        display:'flex', alignItems:'center', justifyContent:'center',
+                      }}>
+                      <IoCloseOutline />
+                    </button>
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => newCollFileRef.current?.click()}
+                    style={{
+                      border:'2px dashed #c8a882', borderRadius:'12px',
+                      padding:'24px', textAlign:'center', cursor:'pointer',
+                      marginBottom:'16px', background:'rgba(200,168,130,0.05)',
+                      transition:'all 0.2s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.borderColor='#9b8ec4'}
+                    onMouseLeave={e => e.currentTarget.style.borderColor='#c8a882'}
+                  >
+                    <div style={{ fontSize:'28px', marginBottom:'6px' }}>🖼️</div>
+                    <p style={{ fontSize:'13px', fontWeight:'600', color:'#7a5c44' }}>
+                      Add Cover Image
+                    </p>
+                    <p style={{ fontSize:'11px', color:'#c8a882', marginTop:'3px' }}>
+                      Optional — JPG, PNG (shown on the collection card)
+                    </p>
+                  </div>
+                )}
+                <input
+                  ref={newCollFileRef}
+                  type="file"
+                  accept="image/*"
+                  style={{ display:'none' }}
+                  onChange={e => {
+                    const f = e.target.files[0];
+                    if (!f) return;
+                    setNewCollFile(f);
+                    setNewCollPreview(URL.createObjectURL(f));
+                  }}
+                />
+
                 <div className="new-collection-form-field">
                   <label className="new-collection-form-label" htmlFor="coll-name">
                     Collection Name *
@@ -416,10 +528,15 @@ function CollectionsPage() {
                 </div>
                 <div className="new-collection-modal-actions">
                   <button type="button" className="new-collection-cancel-btn"
-                    onClick={() => setShowNewCollModal(false)}>Cancel</button>
+                    onClick={() => {
+                      setShowNewCollModal(false);
+                      setNewCollName('');
+                      setNewCollFile(null);
+                      setNewCollPreview('');
+                    }}>Cancel</button>
                   <button type="submit" className="new-collection-save-btn"
                     disabled={isCreating || !newCollName.trim()}>
-                    {isCreating ? 'Creating...' : 'Create Collection'}
+                    {isCreating ? 'Creating...' : '📁 Create Collection'}
                   </button>
                 </div>
               </form>

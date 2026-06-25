@@ -25,9 +25,25 @@ const getMemoryById = async (req, res) => {
     const memory = await Memory.findOne({ _id: req.params.id, userId: req.user._id });
     if (!memory) return res.status(404).json({ message: 'Memory not found.' });
 
-    const allIds = await Memory.find({ userId: req.user._id }).sort({ date: -1 }).select('_id');
+    // source=collection → prev/next within same collection only
+    // source=map or default → prev/next within map memories (no collection) only
+    const { source, collectionId } = req.query;
+
+    let filter = { userId: req.user._id };
+    if (source === 'collection' && (collectionId || memory.collectionId)) {
+      filter.collectionId = collectionId || memory.collectionId;
+    } else {
+      filter.collectionId = null; // map memories only
+    }
+
+    const allIds = await Memory.find(filter).sort({ date: -1 }).select('_id');
     const idx = allIds.findIndex(m => m._id.equals(memory._id));
-    res.json({ ...memory.toObject(), prevMemoryId: allIds[idx + 1]?._id || null, nextMemoryId: allIds[idx - 1]?._id || null });
+
+    res.json({
+      ...memory.toObject(),
+      prevMemoryId: allIds[idx + 1]?._id || null,
+      nextMemoryId: allIds[idx - 1]?._id || null,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

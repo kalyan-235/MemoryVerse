@@ -28,9 +28,12 @@ const getCollectionById = async (req, res) => {
 // POST /api/collections
 const createCollection = async (req, res) => {
   try {
-    const { name, isPrivate } = req.body;
+    const { name, isPrivate, coverImage } = req.body;
     const collection = await Collection.create({
-      userId: req.user._id, name, isPrivate: isPrivate || false,
+      userId:     req.user._id,
+      name,
+      isPrivate:  isPrivate  || false,
+      coverImage: coverImage || '',
     });
     res.status(201).json(collection);
   } catch (error) {
