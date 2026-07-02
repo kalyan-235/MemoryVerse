@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./css/Mobile.css";
 
 /* MemoryVerse Global Styles */
 :root {

@@ -1,0 +1,762 @@
+/* ═══════════════════════════════════════════════════════════════
+   MEMORYVERSE — PROFESSIONAL MOBILE DESIGN SYSTEM
+   Designed like a real native mobile app (iOS/Android feel)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ────────────────────────────────────────────────────────────────
+   MOBILE BOTTOM NAVIGATION
+   ──────────────────────────────────────────────────────────────── */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: rgba(253, 246, 236, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(200, 168, 130, 0.3);
+  z-index: 500;
+  box-shadow: 0 -2px 20px rgba(139, 99, 71, 0.08);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.mobile-bottom-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 60px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #b8a090;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  min-width: 56px;
+  transition: color 0.2s, background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.mobile-nav-item svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+}
+
+.mobile-nav-item.active {
+  color: #9b8ec4;
+}
+
+.mobile-nav-item.active svg {
+  color: #9b8ec4;
+}
+
+/* Active indicator dot */
+.mobile-nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #9b8ec4;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   MOBILE FAB
+   ──────────────────────────────────────────────────────────────── */
+.mobile-fab {
+  display: none;
+  position: fixed;
+  bottom: 76px;
+  right: 18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9b8ec4 0%, #c8a882 100%);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 490;
+  box-shadow: 0 6px 20px rgba(155, 142, 196, 0.5);
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.mobile-fab:active {
+  transform: scale(0.9);
+  box-shadow: 0 3px 12px rgba(155, 142, 196, 0.4);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   MOBILE HEADER
+   ──────────────────────────────────────────────────────────────── */
+.mobile-header {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 400;
+  background: rgba(253, 246, 236, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(200, 168, 130, 0.25);
+  padding: env(safe-area-inset-top, 0px) 16px 0;
+}
+
+.mobile-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+
+.mobile-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Georgia', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #3d2c1e;
+  text-decoration: none;
+}
+
+.mobile-header-title {
+  font-family: 'Georgia', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #3d2c1e;
+}
+
+.mobile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mobile-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(200, 168, 130, 0.15);
+  color: #7a5c44;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.mobile-icon-btn:active { background: rgba(200, 168, 130, 0.35); }
+
+.mobile-add-btn {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 17px;
+  border: none;
+  background: linear-gradient(135deg, #9b8ec4, #c8a882);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 3px 10px rgba(155, 142, 196, 0.35);
+}
+
+/* Search bar in header */
+.mobile-search-row {
+  padding: 8px 0 10px;
+}
+
+.mobile-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 230, 211, 0.8);
+  border-radius: 12px;
+  padding: 9px 14px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.mobile-search-bar:focus-within {
+  background: #fff;
+  border-color: #9b8ec4;
+  box-shadow: 0 0 0 3px rgba(155, 142, 196, 0.12);
+}
+
+.mobile-search-input {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #3d2c1e;
+  outline: none;
+  flex: 1;
+}
+
+.mobile-search-input::placeholder { color: #c8a882; }
+
+/* ────────────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+   ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* ── Show mobile components ── */
+  .mobile-bottom-nav { display: block; }
+  .mobile-header     { display: block; }
+  .mobile-fab        { display: flex !important; }
+
+  /* ── Hide desktop components ── */
+  .sidebar-container  { display: none !important; }
+  .navbar-container   { display: none !important; }
+
+  /* ── Global layout ── */
+  body { background: #fdf6ec; }
+
+  /* Remove desktop margins from all pages */
+  .journey-map-page,
+  .collections-page,
+  .diary-page,
+  .story-writing-page,
+  .favorites-page,
+  .search-page,
+  .profile-settings-page,
+  .memory-detail-page,
+  .calendar-memories-page {
+    margin-left: 0 !important;
+    padding-bottom: 76px !important;
+  }
+
+  /* ── HOME PAGE ── */
+  .journey-map-hero {
+    padding: 16px 16px 8px !important;
+  }
+
+  .journey-map-heading {
+    font-size: 20px !important;
+  }
+
+  .journey-map-subheading {
+    font-size: 12px !important;
+  }
+
+  .journey-map-canvas {
+    margin: 0 0 0 0 !important;
+    height: 200px !important;
+    border-radius: 0 !important;
+  }
+
+  .home-sections-wrapper {
+    padding: 16px !important;
+  }
+
+  .home-section-title {
+    font-size: 15px !important;
+  }
+
+  /* Collections horizontal scroll on home */
+  .home-collections-row {
+    gap: 10px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .home-collection-card {
+    min-width: 110px !important;
+    border-radius: 12px !important;
+  }
+
+  .home-collection-card-img {
+    height: 80px !important;
+  }
+
+  /* Recent memories - 2 columns on mobile */
+  .home-sections-wrapper > div:last-child > div[style*="grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Memory cards */
+  .memory-card-thumbnail {
+    height: 120px !important;
+  }
+
+  .memory-card {
+    border-radius: 14px !important;
+  }
+
+  .memory-card-title {
+    font-size: 12px !important;
+  }
+
+  /* ── COLLECTIONS PAGE ── */
+  .collections-content {
+    padding: 14px !important;
+  }
+
+  .collections-page-title {
+    font-size: 20px !important;
+  }
+
+  .collections-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  .collection-card-cover {
+    height: 110px !important;
+  }
+
+  .collection-card-name {
+    font-size: 13px !important;
+  }
+
+  .create-collection-card {
+    min-height: 140px !important;
+  }
+
+  /* ── DIARY PAGE ── */
+  .diary-content {
+    grid-template-columns: 1fr !important;
+    padding: 14px !important;
+    gap: 14px !important;
+  }
+
+  /* Hide left panel on mobile by default, show as list below */
+  .diary-left-panel {
+    order: 2 !important;
+  }
+
+  .diary-active-entry,
+  .diary-new-entry-form {
+    order: 1 !important;
+    padding: 18px !important;
+  }
+
+  .diary-active-entry-title {
+    font-size: 20px !important;
+  }
+
+  .diary-all-entries-list {
+    border-radius: 16px !important;
+    padding: 16px !important;
+  }
+
+  /* ── STORY WRITING PAGE ── */
+  .story-writing-content {
+    grid-template-columns: 1fr !important;
+    padding: 14px !important;
+    gap: 14px !important;
+  }
+
+  .stories-list-panel {
+    border-radius: 16px !important;
+  }
+
+  .story-editor-panel {
+    border-radius: 16px !important;
+  }
+
+  .story-chapter-editor {
+    grid-template-columns: 1fr !important;
+  }
+
+  .story-chapters-list {
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    min-width: unset !important;
+    border-right: none !important;
+    border-bottom: 1px solid #f5e6d3 !important;
+    padding: 10px 14px !important;
+    gap: 6px !important;
+  }
+
+  .story-chapter-text-area {
+    min-height: 200px !important;
+  }
+
+  /* ── CALENDAR PAGE ── */
+  .calendar-memories-content {
+    grid-template-columns: 1fr !important;
+    padding: 14px !important;
+  }
+
+  .calendar-panel {
+    position: static !important;
+  }
+
+  /* ── FAVORITES PAGE ── */
+  .favorites-page {
+    padding: 14px !important;
+  }
+
+  .favorites-tabs-row {
+    width: 100% !important;
+  }
+
+  .favorites-items-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* ── SEARCH PAGE ── */
+  .search-page {
+    padding: 14px !important;
+  }
+
+  .search-page-heading {
+    font-size: 20px !important;
+  }
+
+  .search-bar-large {
+    border-radius: 14px !important;
+    padding: 12px 16px !important;
+  }
+
+  .search-bar-large-input {
+    font-size: 14px !important;
+  }
+
+  .search-results-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* ── MEMORY DETAIL PAGE ── */
+  .memory-detail-page {
+    padding: 14px !important;
+  }
+
+  .memory-detail-back-btn {
+    margin-bottom: 14px !important;
+    font-size: 13px !important;
+  }
+
+  .memory-detail-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .memory-detail-main-image {
+    height: 260px !important;
+    border-radius: 16px !important;
+  }
+
+  .memory-detail-title {
+    font-size: 20px !important;
+  }
+
+  .memory-detail-nav-buttons {
+    gap: 8px !important;
+  }
+
+  .memory-detail-prev-btn,
+  .memory-detail-next-btn {
+    font-size: 12px !important;
+    padding: 10px !important;
+  }
+
+  .memory-detail-actions {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .memory-action-favorite-btn,
+  .memory-action-edit-btn {
+    font-size: 12px !important;
+    padding: 10px 14px !important;
+  }
+
+  /* ── PROFILE / SETTINGS PAGE ── */
+  .profile-settings-page {
+    padding: 14px !important;
+  }
+
+  .profile-settings-layout {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .profile-settings-tab-panel {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    padding: 6px !important;
+    border-radius: 14px !important;
+    gap: 4px !important;
+    scrollbar-width: none !important;
+  }
+
+  .profile-settings-tab-panel::-webkit-scrollbar { display: none !important; }
+
+  .profile-settings-tab-title { display: none !important; }
+
+  .profile-settings-tab-item {
+    flex-direction: column !important;
+    min-width: 60px !important;
+    padding: 8px 6px !important;
+    font-size: 10px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    gap: 4px !important;
+    border-radius: 10px !important;
+  }
+
+  .profile-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .profile-avatar-section {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  /* ── AUTH PAGES ── */
+  .auth-split-layout {
+    grid-template-columns: 1fr !important;
+    min-height: 100vh !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .auth-branding-panel { display: none !important; }
+
+  .auth-form-panel {
+    padding: 32px 20px !important;
+    justify-content: center !important;
+  }
+
+  .auth-page-wrapper {
+    padding: 0 !important;
+    background: #fdf6ec !important;
+    align-items: stretch !important;
+  }
+
+  /* ── MODALS AS BOTTOM SHEETS ── */
+  .add-memory-modal-overlay,
+  .new-collection-modal-overlay {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  .add-memory-modal,
+  .new-collection-modal {
+    border-radius: 20px 20px 0 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+    animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1) !important;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* Handle bar on modals */
+  .add-memory-modal-header::before,
+  .new-collection-modal-title::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    background: #e8d5c0;
+    border-radius: 2px;
+    margin: 0 auto 16px;
+  }
+
+  /* ── OTP PAGE ── */
+  .otp-inputs-row {
+    gap: 8px !important;
+  }
+
+  .otp-single-input {
+    width: 44px !important;
+    height: 52px !important;
+    font-size: 20px !important;
+  }
+
+  /* ── WELCOME PAGE ── */
+  .welcome-app-name {
+    font-size: 36px !important;
+  }
+
+  .welcome-cta-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+
+  .welcome-get-started-btn,
+  .welcome-login-btn {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  /* ── Map points smaller on mobile ── */
+  .memory-map-point-circle {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 10px !important;
+    border-width: 2px !important;
+  }
+
+  .memory-map-popup {
+    width: 160px !important;
+    padding: 10px !important;
+  }
+
+  .memory-map-popup-image {
+    height: 80px !important;
+  }
+
+  /* ── Touch improvements ── */
+  .sidebar-nav-item,
+  .diary-action-btn,
+  .memory-card-favorite-btn,
+  .collection-card-action-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* ── Scrollable horizontal lists ── */
+  .home-collections-row,
+  .story-chapters-list {
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+  }
+
+  .home-collection-card {
+    scroll-snap-align: start !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   EXTRA SMALL (≤ 380px — iPhone SE, older small phones)
+   ──────────────────────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .collections-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .favorites-items-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .search-results-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .memory-detail-main-image {
+    height: 220px !important;
+  }
+
+  .journey-map-canvas {
+    height: 180px !important;
+  }
+
+  .mobile-nav-item {
+    min-width: 48px !important;
+    font-size: 9px !important;
+    padding: 6px 8px !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   TABLET (769px–1024px) — keep sidebar, improve grid
+   ──────────────────────────────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sidebar-container {
+    width: 190px !important;
+    min-width: 190px !important;
+  }
+
+  .collections-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .journey-map-canvas {
+    height: 320px !important;
+  }
+
+  .profile-settings-layout {
+    grid-template-columns: 200px 1fr !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   TOUCH DEVICE — improve tap targets
+   ──────────────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  /* Prevent zoom on input focus (iOS) */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+
+  /* Remove hover effects — they stick on touch */
+  .memory-card:hover,
+  .collection-card:hover,
+  .home-collection-card:hover {
+    transform: none !important;
+    box-shadow: inherit !important;
+  }
+
+  /* Active state for touch feedback */
+  .memory-card:active  { transform: scale(0.97) !important; }
+  .collection-card:active { transform: scale(0.97) !important; }
+  .sidebar-nav-item:active { opacity: 0.7 !important; }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   SAFE AREA — notch/home indicator support
+   ──────────────────────────────────────────────────────────────── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-bottom-nav {
+    height: calc(60px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mobile-fab {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+
+  @media (max-width: 768px) {
+    .journey-map-page,
+    .collections-page,
+    .diary-page,
+    .story-writing-page,
+    .favorites-page,
+    .search-page,
+    .profile-settings-page,
+    .memory-detail-page,
+    .calendar-memories-page {
+      padding-bottom: calc(76px + env(safe-area-inset-bottom)) !important;
+    }
+  }
+}

@@ -9,7 +9,6 @@
   display: flex;
   flex-direction: column;
   padding: 24px 0;
-  /* Sticky so sidebar stays visible while scrolling */
   position: sticky;
   top: 0;
   height: 100vh;
@@ -18,6 +17,8 @@
   box-shadow: 2px 0 12px rgba(139, 99, 71, 0.08);
   z-index: 100;
 }
+
+/* Hidden on mobile via Mobile.css media query */
 
 .sidebar-logo {
   display: flex;

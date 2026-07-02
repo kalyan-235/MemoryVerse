@@ -3,8 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+
+    <!-- Mobile viewport — prevents zoom, respects safe areas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+    <!-- PWA / Mobile App Meta -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MemoryVerse" />
+    <meta name="theme-color" content="#fdf6ec" />
+
+    <!-- SEO -->
+    <meta name="description" content="MemoryVerse — Your personal digital memory journal. Store memories, write diaries, create stories." />
+    <meta name="application-name" content="MemoryVerse" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MemoryVerse" />
+    <meta property="og:description" content="Treasure Your Memories, Every Day." />
+    <meta property="og:type" content="website" />
+
+    <title>MemoryVerse</title>
+
+    <style>
+      /* Prevent pull-to-refresh on mobile */
+      html { overscroll-behavior-y: none; }
+      body { overscroll-behavior-y: none; }
+      /* Prevent text selection flicker on touch */
+      * { -webkit-tap-highlight-color: transparent; }
+      /* Smooth scrolling */
+      html { scroll-behavior: smooth; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
